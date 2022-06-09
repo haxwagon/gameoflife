@@ -154,7 +154,7 @@ func runGameOfLife(inputFile string, iterations int) error {
 		return fmt.Errorf("parsing cells failed: %v", err)
 	}
 
-	// Run simultion
+	// Run simulation
 	for iteration := 0; iteration < iterations; iteration++ {
 		// If an "alive" cell had less than 2 or more than 3 alive neighbors (in any of the 8 surrounding cells), it becomes dead.
 		dyingCells := make(Cells)
@@ -175,13 +175,10 @@ func runGameOfLife(inputFile string, iterations int) error {
 		}
 
 		// apply changes for next iteration
-		fmt.Fprintf(os.Stderr, "Iteration #%d\n", iteration)
 		for cell := range dyingCells {
-			fmt.Fprintf(os.Stderr, "(%d, %d) is dying\n", cell.x, cell.y)
 			cells.removeCell(cell)
 		}
 		for cell := range birthedCells {
-			fmt.Fprintf(os.Stderr, "(%d, %d) is being born\n", cell.x, cell.y)
 			cells.addCell(cell)
 		}
 	}
